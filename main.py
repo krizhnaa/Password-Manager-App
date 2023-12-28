@@ -8,9 +8,9 @@ def add_pass():
     web_inp = web_field.get()
     mail_inp = mail_field.get()
     pass_inp = pass_field.get()
-    print(mail_inp)
-    print(web_inp)
-    print(pass_inp)
+    txt_file = open("dat.txt", 'a')
+    txt_file.write(f"{web_inp} | {mail_inp} | {pass_inp}" + "\n")
+    txt_file.close()
 
 # ---------------------------- UI SETUP ------------------------------- #
 
