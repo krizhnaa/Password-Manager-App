@@ -1,5 +1,5 @@
 from tkinter import *
-
+from tkinter import messagebox
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -8,12 +8,19 @@ def add_pass():
     web_inp = web_field.get()
     mail_inp = mail_field.get()
     pass_inp = pass_field.get()
-    txt_file = open("dat.txt", 'a')
-    txt_file.write(f"{web_inp} | {mail_inp} | {pass_inp}" + "\n")
-    txt_file.close()
-    web_field.delete(0, END)
-    mail_field.delete(0, mail_field.index("end") - 10)
-    pass_field.delete(0, END)
+    is_ok = True
+
+    if web_inp == "" or pass_inp == "" or mail_inp == "@gmail.com":
+        messagebox.showerror(title="Empty", message="You left some fields empty")
+        is_ok = False
+
+    if is_ok:
+        txt_file = open("dat.txt", 'a')
+        txt_file.write(f"{web_inp} | {mail_inp} | {pass_inp}" + "\n")
+        txt_file.close()
+        web_field.delete(0, END)
+        mail_field.delete(0, mail_field.index("end") - 10)
+        pass_field.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
