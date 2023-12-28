@@ -11,6 +11,9 @@ def add_pass():
     txt_file = open("dat.txt", 'a')
     txt_file.write(f"{web_inp} | {mail_inp} | {pass_inp}" + "\n")
     txt_file.close()
+    web_field.delete(0, END)
+    mail_field.delete(0, mail_field.index("end") - 10)
+    pass_field.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
