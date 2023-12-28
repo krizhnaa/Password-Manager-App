@@ -4,6 +4,14 @@ from tkinter import *
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
+def add_pass():
+    web_inp = web_field.get()
+    mail_inp = mail_field.get()
+    pass_inp = pass_field.get()
+    print(mail_inp)
+    print(web_inp)
+    print(pass_inp)
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = Tk()
@@ -21,14 +29,18 @@ web_lbl.config(text="Website: ")
 web_lbl.grid(row=1, column=0)
 
 web_field = Entry(width=40)
+web_field.focus()
 web_field.grid(row=1, column=1, columnspan=2)
+
 
 mail_lbl = Label()
 mail_lbl.config(text="Email/Username: ")
 mail_lbl.grid(row=2, column=0)
 
 mail_field = Entry(width=40)
+mail_field.insert(0, "@gmail.com")
 mail_field.grid(row=2, column=1, columnspan=2)
+
 
 pass_lbl = Label()
 pass_lbl.config(text="Password: ")
@@ -37,12 +49,13 @@ pass_lbl.grid(row=3, column=0)
 pass_field = Entry(width=22)
 pass_field.grid(row=3, column=1)
 
+
 gnrt_btn = Button()
 gnrt_btn.config(text="Generate Password")
 gnrt_btn.grid(row=3, column=2)
 
 add_btn = Button(width=34)
-add_btn.config(text="Add")
+add_btn.config(text="Add", command=add_pass)
 add_btn.grid(row=4, column=1, columnspan=2)
 
 
