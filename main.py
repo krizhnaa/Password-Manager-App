@@ -31,6 +31,15 @@ def generate_pass():
     pass_field.insert(0, f"{password}")
     pyperclip.copy(password)
 
+# ---------------------------- SEARCH ------------------------------- #
+
+def search_web():
+    web_inp = web_field.get()
+    with open("data.json", 'r') as data_file:
+        data = json.load(data_file)
+        if data[web_inp]:
+            messagebox.showinfo(title="Existing", message=f"Mail : {data[web_inp]['Mail']} \nPassword : {data[web_inp]['Password']}")
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def add_pass():
@@ -79,9 +88,9 @@ web_lbl = Label()
 web_lbl.config(text="Website: ")
 web_lbl.grid(row=1, column=0)
 
-web_field = Entry(width=40)
+web_field = Entry(width=22)
 web_field.focus()
-web_field.grid(row=1, column=1, columnspan=2)
+web_field.grid(row=1, column=1, columnspan=1)
 
 
 mail_lbl = Label()
@@ -104,6 +113,10 @@ pass_field.grid(row=3, column=1)
 gnrt_btn = Button()
 gnrt_btn.config(text="Generate Password", command=generate_pass)
 gnrt_btn.grid(row=3, column=2)
+
+search_btn = Button(width=10)
+search_btn.config(text="Search", command=search_web)
+search_btn.place(x=305, y=200)
 
 add_btn = Button(width=34)
 add_btn.config(text="Add", command=add_pass)
