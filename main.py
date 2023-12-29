@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import pyperclip
+import json
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 
@@ -37,17 +38,29 @@ def add_pass():
     mail_inp = mail_field.get()
     pass_inp = pass_field.get()
     is_ok = True
+    data_list = { web_inp: {
+        "Mail": mail_inp,
+        "Password": pass_inp
+    }}
 
     if web_inp == "" or pass_inp == "" or mail_inp == "@gmail.com":
         messagebox.showerror(title="Empty", message="You left some fields empty")
         is_ok = False
 
     if is_ok:
-        txt_file = open("dat.txt", 'a')
-        txt_file.write(f"{web_inp} | {mail_inp} | {pass_inp}" + "\n")
-        txt_file.close()
+        with open("data.json", 'r') as data_file:
+            try:
+                data = json.load(data_file)
+            except:
+                with open("data.json", "w") as data_file:
+                    json.dump(data_list, data_file, indent=4)
+            else:
+                data.update(data_list)
+                with open("data.json", "w") as data_file:
+                    json.dump(data, data_file, indent=4)
+                print("Updated Successfully")
         web_field.delete(0, END)
-        mail_field.delete(0, mail_field.index("end") - 10)
+        mail_field.delete(0, mail_field.index("end") - 17)
         pass_field.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -76,7 +89,7 @@ mail_lbl.config(text="Email/Username: ")
 mail_lbl.grid(row=2, column=0)
 
 mail_field = Entry(width=40)
-mail_field.insert(0, "@gmail.com")
+mail_field.insert(0, "lololol@gmail.com")
 mail_field.grid(row=2, column=1, columnspan=2)
 
 
