@@ -36,9 +36,12 @@ def generate_pass():
 def search_web():
     web_inp = web_field.get()
     with open("data.json", 'r') as data_file:
-        data = json.load(data_file)
-        if data[web_inp]:
-            messagebox.showinfo(title="Existing", message=f"Mail : {data[web_inp]['Mail']} \nPassword : {data[web_inp]['Password']}")
+        try:
+            data = json.load(data_file)
+            if data[web_inp]:
+                messagebox.showinfo(title="Existing", message=f"Mail : {data[web_inp]['Mail']} \nPassword : {data[web_inp]['Password']}")
+        except:
+            print("Not Found")
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
